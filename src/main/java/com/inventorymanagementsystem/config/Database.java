@@ -1,33 +1,47 @@
 package com.inventorymanagementsystem.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Properties;
 
 public class Database {
-    private static String CONFIG_FILE="application.properties";
-    private static Database database=new Database();
-    public static Database getInstance()
-    {
-        if (database== null)
-            database= new Database();
+    private static Database database;
+
+    // Singleton Instance
+    public static Database getInstance() {
+        if (database == null) {
+            database = new Database();
+        }
         return database;
     }
-    public Connection connectDB(){
-        Properties dbConfig=new Properties();
-      try{
-          InputStream input=this.getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
-          dbConfig.load(input);
-          Class.forName(dbConfig.getProperty("javafx.jdbc.driver"));
-          Connection connection=DriverManager.getConnection(dbConfig.getProperty("javafx.datasource.url"),dbConfig.getProperty("javafx.datasource.username"), dbConfig.getProperty("javafx.datasource.password"));
-          return connection;
-      }catch (Exception exception){
-        exception.printStackTrace();
-      }
-      return null;
+
+    public Connection connectDB() {
+        // Hardcoded database connection details
+        String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+        String jdbcUrl = "jdbc:mysql://localhost:3306/test"; // Ganti "test" dengan nama database Anda
+        String username = "root"; // Ganti dengan username database Anda
+        String password = "020605"; // Ganti dengan password database Anda
+
+        try {
+            // Load JDBC Driver
+            Class.forName(jdbcDriver);
+            // Establish the connection
+            Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+            System.out.println("Koneksi ke database berhasil!");
+            return connection;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        // Test the connection
+        Database db = Database.getInstance();
+        Connection conn = db.connectDB();
+        if (conn != null) {
+            System.out.println("Koneksi berhasil boyyy!");
+        } else {
+            System.out.println("Koneksi gagal!");
+        }
     }
 }
