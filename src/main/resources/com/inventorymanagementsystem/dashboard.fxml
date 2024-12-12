@@ -69,6 +69,14 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="USER" size="1.2em" />
                      </graphic>
                   </Button>
+                  <Button fx:id="inventory_btn" layoutX="39.0" layoutY="480.0" mnemonicParsing="false" onAction="#activateAnchorPane" prefWidth="200.0" styleClass="navbutton" text="INVENTORY" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CUBES" size="1.2em" />
+                     </graphic>
+                  </Button>
                   <Button fx:id="signout_btn" layoutX="14.0" layoutY="641.0" mnemonicParsing="false" onAction="#signOut" prefHeight="38.0" prefWidth="115.0" styleClass="navbutton" stylesheets="@dashboard.css" text="SIGN OUT" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
@@ -87,7 +95,7 @@
                   </Button>
                   <AnchorPane layoutX="-2.0" prefHeight="47.0" prefWidth="741.0">
                      <children>
-                        <Label layoutX="26.0" layoutY="4.0" prefHeight="42.0" prefWidth="530.0" text="EL FASHION INVENTORY AND SALES MANAGEMENT SYSTEM">
+                        <Label layoutX="26.0" layoutY="4.0" prefHeight="42.0" prefWidth="530.0" text="EL MARKET INVENTORY AND SALES MANAGEMENT SYSTEM">
                            <font>
                               <Font name="Arial Black" size="14" />
                            </font>
@@ -414,6 +422,20 @@
                            </font>
                         </Label>
                      </children></AnchorPane>
+                  <AnchorPane fx:id="inventory_pane" layoutX="-1.0" layoutY="55.0" prefHeight="639.0" prefWidth="820.0" visible="false">
+                     <children>
+                        <TableView fx:id="inventory_table" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="780.0">
+                           <columns>
+                              <TableColumn fx:id="inventory_col_id" text="ID" prefWidth="100.0" />
+                              <TableColumn fx:id="inventory_col_item_number" text="Item Number" prefWidth="150.0" />
+                              <TableColumn fx:id="inventory_col_item_group" text="Item Group" prefWidth="150.0" />
+                              <TableColumn fx:id="inventory_col_quantity" text="Quantity" prefWidth="100.0" />
+                              <TableColumn fx:id="inventory_col_price" text="Price" prefWidth="100.0" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="inventory_add_btn" layoutX="20.0" layoutY="540.0" prefWidth="120.0" text="Add Item" onAction="#addInventoryItem" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>

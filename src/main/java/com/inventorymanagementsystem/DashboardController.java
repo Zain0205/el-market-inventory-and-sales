@@ -257,6 +257,31 @@ public class DashboardController implements Initializable {
     private Label dash_total_stocks;
 
     @FXML
+    private Button inventory_btn;
+
+    @FXML
+    private AnchorPane inventory_pane;
+
+    @FXML
+    private TableView<Product> inventory_table;
+
+    @FXML
+    private TableColumn<Product, Integer> inventory_col_id;
+
+    @FXML
+    private TableColumn<Product, String> inventory_col_item_number;
+
+    @FXML
+    private TableColumn<Product, String> inventory_col_item_group;
+
+    @FXML
+    private TableColumn<Product, Integer> inventory_col_quantity;
+
+    @FXML
+    private TableColumn<Product, Double> inventory_col_price;
+
+
+    @FXML
     private Button signout_btn;
 
     List<Product> productsList;
@@ -272,11 +297,13 @@ public class DashboardController implements Initializable {
             customer_pane.setVisible(false);
             sales_pane.setVisible(false);
             purchase_pane.setVisible(false);
+            inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         billing_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -284,11 +311,13 @@ public class DashboardController implements Initializable {
             customer_pane.setVisible(false);
             sales_pane.setVisible(false);
             purchase_pane.setVisible(false);
+            inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         customer_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -296,11 +325,14 @@ public class DashboardController implements Initializable {
             customer_pane.setVisible(true);
             sales_pane.setVisible(false);
             purchase_pane.setVisible(false);
+            inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+
         });
         sales_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -308,11 +340,14 @@ public class DashboardController implements Initializable {
             customer_pane.setVisible(false);
             sales_pane.setVisible(true);
             purchase_pane.setVisible(false);
+            inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+
         });
         purchase_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -320,13 +355,33 @@ public class DashboardController implements Initializable {
             customer_pane.setVisible(false);
             sales_pane.setVisible(false);
             purchase_pane.setVisible(true);
+            inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
-            });
+            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
 
+        });
+
+        inventory_btn.setOnMouseClicked(mouseEvent -> {
+            dasboard_pane.setVisible(false);
+            billing_pane.setVisible(false);
+            customer_pane.setVisible(false);
+            sales_pane.setVisible(false);
+            purchase_pane.setVisible(false);
+            inventory_pane.setVisible(true);
+
+            dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
+
+            showInventoryData();
+        });
 
 
     }
@@ -341,6 +396,7 @@ public class DashboardController implements Initializable {
         customer_pane.setVisible(false);
         sales_pane.setVisible(false);
         purchase_pane.setVisible(false);
+        inventory_pane.setVisible(false);
     }
 
     public List<Product> getItemsList(){
@@ -1175,6 +1231,49 @@ public class DashboardController implements Initializable {
             alert.showAndWait();
         }
     }
+    public void showInventoryData() {
+        ObservableList<Product> productList = FXCollections.observableArrayList();
+        connection = Database.getInstance().connectDB();
+        String sql = "SELECT * FROM products";
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                productList.add(new Product(
+                        resultSet.getInt("id"),
+                        resultSet.getString("item_number"),
+                        resultSet.getString("item_group"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getDouble("price")
+                ));
+            }
+            inventory_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            inventory_col_item_number.setCellValueFactory(new PropertyValueFactory<>("itemNumber"));
+            inventory_col_item_group.setCellValueFactory(new PropertyValueFactory<>("itemGroup"));
+            inventory_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+            inventory_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+            inventory_table.setItems(productList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void addInventoryItem() {
+        String sql = "INSERT INTO products (item_number, item_group, quantity, price) VALUES (?, ?, ?, ?)";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "NewItem123");
+            preparedStatement.setString(2, "NewGroup");
+            preparedStatement.setInt(3, 100);
+            preparedStatement.setDouble(4, 500.00);
+            int result = preparedStatement.executeUpdate();
+            if (result > 0) {
+                showInventoryData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void showDashboardData(){
      getTotalPurchase();
      getTotalSales();
@@ -1236,5 +1335,8 @@ public class DashboardController implements Initializable {
 
 //      Purchase Pane
         showPurchaseData();
+
+//      INVENTORY PANE
+//        showInventoryData();
     }
 }

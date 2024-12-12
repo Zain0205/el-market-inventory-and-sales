@@ -71,7 +71,7 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <Label fx:id="c_logo" layoutX="138.0" layoutY="238.0" prefHeight="178.0" prefWidth="94.0" text="F">
+                        <Label fx:id="c_logo" layoutX="138.0" layoutY="238.0" prefHeight="178.0" prefWidth="94.0" text="M">
                            <font>
                               <Font name="Engravers MT" size="60.0" />
                            </font>
