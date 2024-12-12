@@ -87,9 +87,9 @@
                   </Button>
                   <AnchorPane layoutX="-2.0" prefHeight="47.0" prefWidth="741.0">
                      <children>
-                        <Label layoutX="26.0" layoutY="4.0" prefHeight="42.0" prefWidth="530.0" text="FASHION CLUB MANAGEMENT SYSTEM">
+                        <Label layoutX="26.0" layoutY="4.0" prefHeight="42.0" prefWidth="530.0" text="EL FASHION INVENTORY AND SALES MANAGEMENT SYSTEM">
                            <font>
-                              <Font name="Cooper Black" size="24.0" />
+                              <Font name="Arial Black" size="14" />
                            </font>
                         </Label>
                      </children>
@@ -145,7 +145,7 @@
                                     <Font name="Arial Rounded MT Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="dash_total_sales_this_month" layoutX="97.0" layoutY="71.0" prefHeight="36.0" prefWidth="191.0" text="15000" textFill="WHITE">
+                              <Label fx:id="dash_total_sales_this_month" layoutX="110.0" layoutY="71.0" prefHeight="36.0" prefWidth="191.0" text="15000" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="30.0" />
                                  </font>
@@ -155,9 +155,9 @@
                                     <Font name="Arial Rounded MT Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="71.0" layoutY="67.0" prefHeight="45.0" prefWidth="26.0" text="₹ " textFill="WHITE">
+                              <Label layoutX="71.0" layoutY="67.0" prefHeight="45.0" prefWidth="45.0" text="IDR " textFill="WHITE">
                                  <font>
-                                    <Font size="30.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </children>
@@ -274,12 +274,12 @@
                               <Font name="Dubai Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="559.0" layoutY="534.0" prefHeight="32.0" prefWidth="15.0" text="₹ ">
+                        <Label layoutX="559.0" layoutY="534.0" prefHeight="32.0" prefWidth="45.0" text="IDR ">
                            <font>
-                              <Font name="Dubai Bold" size="18.0" />
+                              <Font name="Dubai Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="final_amount" layoutX="574.0" layoutY="534.0" prefHeight="32.0" prefWidth="156.0" text="0.00">
+                        <Label fx:id="final_amount" layoutX="600.0" layoutY="534.0" prefHeight="32.0" prefWidth="156.0" text="0.00">
                            <font>
                               <Font name="Dubai Bold" size="18.0" />
                            </font>

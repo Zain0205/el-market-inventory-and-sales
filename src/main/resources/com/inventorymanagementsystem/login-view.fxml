@@ -30,7 +30,7 @@
                               <Font size="18.0" />
                            </font>
                         </PasswordField>
-                        <Label alignment="CENTER" layoutX="345.0" layoutY="262.0" prefHeight="44.0" prefWidth="166.0" text="Login" textFill="#ec1fff">
+                        <Label alignment="CENTER" layoutX="345.0" layoutY="262.0" prefHeight="44.0" prefWidth="166.0" text="Login" textFill="#000000">
                            <font>
                               <Font name="Berlin Sans FB" size="48.0" />
                            </font>
@@ -50,9 +50,9 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="694.0" prefWidth="275.0" styleClass="login-bg" stylesheets="@login.css">
                      <children>
-                        <Label fx:id="f_logo" layoutX="34.0" layoutY="232.0" prefHeight="190.0" prefWidth="103.0" text="F">
+                        <Label fx:id="f_logo" layoutX="34.0" layoutY="232.0" prefHeight="190.0" prefWidth="103.0" text="E">
                            <font>
-                              <Font name="Engravers MT" size="86.0" />
+                              <Font name="Engravers MT" size="60.0" />
                            </font>
                            <textFill>
                               <LinearGradient endX="0.7662834737492704" endY="0.6130268053076733" startY="0.999999984927561">
@@ -71,9 +71,9 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <Label fx:id="c_logo" layoutX="138.0" layoutY="238.0" prefHeight="178.0" prefWidth="94.0" text="C">
+                        <Label fx:id="c_logo" layoutX="138.0" layoutY="238.0" prefHeight="178.0" prefWidth="94.0" text="F">
                            <font>
-                              <Font name="Engravers MT" size="86.0" />
+                              <Font name="Engravers MT" size="60.0" />
                            </font>
                            <textFill>
                               <LinearGradient endX="0.6934865900383143" endY="0.08429115668110465" startX="0.2720306522544773">

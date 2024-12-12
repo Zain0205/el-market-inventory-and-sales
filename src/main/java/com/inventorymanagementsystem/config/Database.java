@@ -17,9 +17,9 @@ public class Database {
     public Connection connectDB() {
         // Hardcoded database connection details
         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-        String jdbcUrl = "jdbc:mysql://localhost:3306/test"; // Ganti "test" dengan nama database Anda
+        String jdbcUrl = "jdbc:mysql://localhost:3306/el_market_db"; // Ganti "test" dengan nama database Anda
         String username = "root"; // Ganti dengan username database Anda
-        String password = "020605"; // Ganti dengan password database Anda
+        String password = "defanda2005"; // Ganti dengan password database Anda
 
         try {
             // Load JDBC Driver
