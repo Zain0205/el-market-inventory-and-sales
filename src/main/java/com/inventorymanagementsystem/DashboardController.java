@@ -280,6 +280,25 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<Product, Double> inventory_col_price;
 
+    @FXML
+    private TextField inventory_field_item_number;
+
+    @FXML
+    private TextField inventory_field_item_group;
+
+    @FXML
+    private TextField inventory_field_quantity;
+
+    @FXML
+    private TextField inventory_field_price;
+
+    @FXML
+    private Button inventory_add_btn;
+
+    @FXML
+    private Button inventory_edit_btn;
+
+
 
     @FXML
     private Button signout_btn;
@@ -1259,21 +1278,111 @@ public class DashboardController implements Initializable {
         }
     }
     public void addInventoryItem() {
+        if (inventory_field_item_number.getText().isBlank() ||
+                inventory_field_item_group.getText().isBlank() ||
+                inventory_field_quantity.getText().isBlank() ||
+                inventory_field_price.getText().isBlank()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Input Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields!");
+            alert.showAndWait();
+            return;
+        }
+
+        connection = Database.getInstance().connectDB();
         String sql = "INSERT INTO products (item_number, item_group, quantity, price) VALUES (?, ?, ?, ?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "NewItem123");
-            preparedStatement.setString(2, "NewGroup");
-            preparedStatement.setInt(3, 100);
-            preparedStatement.setDouble(4, 500.00);
+            preparedStatement.setString(1, inventory_field_item_number.getText());
+            preparedStatement.setString(2, inventory_field_item_group.getText());
+            preparedStatement.setInt(3, Integer.parseInt(inventory_field_quantity.getText()));
+            preparedStatement.setDouble(4, Double.parseDouble(inventory_field_price.getText()));
+
             int result = preparedStatement.executeUpdate();
             if (result > 0) {
                 showInventoryData();
+                clearInventoryFields();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Item added successfully!");
+                alert.showAndWait();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void editInventoryItem() {
+        if (inventory_table.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Selection Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an item to edit!");
+            alert.showAndWait();
+            return;
+        }
+
+        if (inventory_field_item_number.getText().isBlank() ||
+                inventory_field_item_group.getText().isBlank() ||
+                inventory_field_quantity.getText().isBlank() ||
+                inventory_field_price.getText().isBlank()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Input Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields!");
+            alert.showAndWait();
+            return;
+        }
+
+        connection = Database.getInstance().connectDB();
+        String sql = "UPDATE products SET item_number = ?, item_group = ?, quantity = ?, price = ? WHERE id = ?";
+        try {
+            Product selectedProduct = inventory_table.getSelectionModel().getSelectedItem();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, inventory_field_item_number.getText());
+            preparedStatement.setString(2, inventory_field_item_group.getText());
+            preparedStatement.setInt(3, Integer.parseInt(inventory_field_quantity.getText()));
+            preparedStatement.setDouble(4, Double.parseDouble(inventory_field_price.getText()));
+            preparedStatement.setInt(5, selectedProduct.getId());
+
+            int result = preparedStatement.executeUpdate();
+            if (result > 0) {
+                showInventoryData();
+                clearInventoryFields();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Item updated successfully!");
+                alert.showAndWait();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectInventoryTableData() {
+        Product selectedProduct = inventory_table.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            inventory_field_item_number.setText(selectedProduct.getItemNumber());
+            inventory_field_item_group.setText(selectedProduct.getItemGroup());
+            inventory_field_quantity.setText(String.valueOf(selectedProduct.getQuantity()));
+            inventory_field_price.setText(String.valueOf(selectedProduct.getPrice()));
+        }
+    }
+
+
+    private void clearInventoryFields() {
+        inventory_field_item_number.clear();
+        inventory_field_item_group.clear();
+        inventory_field_quantity.clear();
+        inventory_field_price.clear();
+    }
+
+
     public void showDashboardData(){
      getTotalPurchase();
      getTotalSales();
