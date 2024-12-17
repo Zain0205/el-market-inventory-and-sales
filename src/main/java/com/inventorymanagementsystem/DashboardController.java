@@ -1329,6 +1329,7 @@ public class DashboardController implements Initializable {
             if (result > 0) {
                 showInventoryData();
                 clearInventoryFields();
+                getTotalStocks();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
@@ -1378,6 +1379,7 @@ public class DashboardController implements Initializable {
             if (result > 0) {
                 showInventoryData();
                 clearInventoryFields();
+                getTotalStocks();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
