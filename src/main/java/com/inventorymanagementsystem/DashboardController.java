@@ -61,11 +61,11 @@ public class DashboardController implements Initializable {
     private AnchorPane dasboard_pane;
 
 
-    @FXML
-    private Button purchase_btn;
+    // @FXML
+    // private Button purchase_btn;
 
-    @FXML
-    private AnchorPane purchase_pane;
+    // @FXML
+    // private AnchorPane purchase_pane;
 
     @FXML
     private Button sales_btn;
@@ -205,35 +205,35 @@ public class DashboardController implements Initializable {
     @FXML
     private Label sales_total_amount;
 
-    @FXML
-    private Button purchase_btn_add;
+    // @FXML
+    // private Button purchase_btn_add;
 
-    @FXML
-    private Button purchase_btn_print;
+    // @FXML
+    // private Button purchase_btn_print;
 
-    @FXML
-    private Label purchase_total_amount;
+    // @FXML
+    // private Label purchase_total_amount;
 
-    @FXML
-    private TableColumn<?, ?> purchase_col_date_of_purchase;
+    // @FXML
+    // private TableColumn<?, ?> purchase_col_date_of_purchase;
 
-    @FXML
-    private TableColumn<?, ?> purchase_col_id;
+    // @FXML
+    // private TableColumn<?, ?> purchase_col_id;
 
-    @FXML
-    private TableColumn<?, ?> purchase_col_invoice;
+    // @FXML
+    // private TableColumn<?, ?> purchase_col_invoice;
 
-    @FXML
-    private TableColumn<?, ?> purchase_col_shop_details;
+    // @FXML
+    // private TableColumn<?, ?> purchase_col_shop_details;
 
-    @FXML
-    private TableColumn<?, ?> purchase_col_total_amount;
+    // @FXML
+    // private TableColumn<?, ?> purchase_col_total_amount;
 
-    @FXML
-    private TableColumn<?, ?> purchase_col_total_items;
+    // @FXML
+    // private TableColumn<?, ?> purchase_col_total_items;
 
-    @FXML
-    private TableView<Purchase> purchase_table;
+    // @FXML
+    // private TableView<Purchase> purchase_table;
 
     @FXML
     private Label dash_total_items_sold_this_month;
@@ -321,7 +321,7 @@ public class DashboardController implements Initializable {
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            // purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         billing_btn.setOnMouseClicked(mouseEvent -> {
@@ -329,13 +329,13 @@ public class DashboardController implements Initializable {
             billing_pane.setVisible(true);
             customer_pane.setVisible(false);
             sales_pane.setVisible(false);
-            purchase_pane.setVisible(false);
+            // purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            // purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         customer_btn.setOnMouseClicked(mouseEvent -> {
@@ -343,13 +343,13 @@ public class DashboardController implements Initializable {
             billing_pane.setVisible(false);
             customer_pane.setVisible(true);
             sales_pane.setVisible(false);
-            purchase_pane.setVisible(false);
+            // purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            // purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
 
         });
@@ -358,13 +358,13 @@ public class DashboardController implements Initializable {
             billing_pane.setVisible(false);
             customer_pane.setVisible(false);
             sales_pane.setVisible(true);
-            purchase_pane.setVisible(false);
+            // purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
-            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            // purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
 
         });
@@ -389,14 +389,14 @@ public class DashboardController implements Initializable {
             billing_pane.setVisible(false);
             customer_pane.setVisible(false);
             sales_pane.setVisible(false);
-            purchase_pane.setVisible(false);
+            // purchase_pane.setVisible(false);
             inventory_pane.setVisible(true);
 
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            // purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
 
             showInventoryData();
@@ -414,7 +414,7 @@ public class DashboardController implements Initializable {
         billing_pane.setVisible(false);
         customer_pane.setVisible(false);
         sales_pane.setVisible(false);
-        purchase_pane.setVisible(false);
+        // purchase_pane.setVisible(false);
         inventory_pane.setVisible(false);
     }
 
@@ -1071,98 +1071,98 @@ public class DashboardController implements Initializable {
             err.printStackTrace();
         }
     }
-    public void getTotalPurchaseAmount(){
-        connection=Database.getInstance().connectDB();
-        String sql="SELECT SUM(total_amount) as total_purchase_amount FROM purchase";
-        try{
-            statement=connection.createStatement();
-            resultSet=statement.executeQuery(sql);
-            while (resultSet.next()){
-                String result=resultSet.getString("total_purchase_amount");
-                if (result == null) {
-                    purchase_total_amount.setText("0.00");
-                }else{
-                    purchase_total_amount.setText(result);
-                }
-            }
-        }catch (Exception err){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeight(500);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText(err.getMessage());
-            alert.showAndWait();
-        }
+    // public void getTotalPurchaseAmount(){
+    //     connection=Database.getInstance().connectDB();
+    //     String sql="SELECT SUM(total_amount) as total_purchase_amount FROM purchase";
+    //     try{
+    //         statement=connection.createStatement();
+    //         resultSet=statement.executeQuery(sql);
+    //         while (resultSet.next()){
+    //             String result=resultSet.getString("total_purchase_amount");
+    //             if (result == null) {
+    //                 purchase_total_amount.setText("0.00");
+    //             }else{
+    //                 purchase_total_amount.setText(result);
+    //             }
+    //         }
+    //     }catch (Exception err){
+    //         Alert alert = new Alert(Alert.AlertType.ERROR);
+    //         alert.setHeight(500);
+    //         alert.setTitle("Error Message");
+    //         alert.setHeaderText(null);
+    //         alert.setContentText(err.getMessage());
+    //         alert.showAndWait();
+    //     }
 
-    }
-    public void printPurchaseDetails(){
-        connection=Database.getInstance().connectDB();
-        String sql="SELECT * FROM purchase";
-        try{
-            JasperDesign jasperDesign= JRXmlLoader.load(this.getClass().getClassLoader().getResourceAsStream("jasper-reports/purchase_report.jrxml"));
-            JRDesignQuery updateQuery=new JRDesignQuery();
-            updateQuery.setText(sql);
-            jasperDesign.setQuery(updateQuery);
-            JasperReport jasperReport= JasperCompileManager.compileReport(jasperDesign);
-            JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,null,connection);
-            JasperViewer.viewReport(jasperPrint ,false);
-        }catch (Exception err){
-            err.printStackTrace();
-        }
-    }
-    public ObservableList<Purchase> listPurchaseData(){
-        ObservableList<Purchase> purchaseList=FXCollections.observableArrayList();
-        connection=Database.getInstance().connectDB();
-        String sql="SELECT * FROM Purchase";
-        try{
-            statement=connection.createStatement();
-            resultSet=statement.executeQuery(sql);
-            Purchase purchase;
-            while (resultSet.next()){
-                purchase=new Purchase(Integer.parseInt(resultSet.getString("id")),resultSet.getString("invoice"),resultSet.getString("shop and address"),Integer.parseInt(resultSet.getString("total_items")),Double.parseDouble(resultSet.getString("total_amount")),resultSet.getString("date_of_purchase"));
-                purchaseList.addAll(purchase);
-            }
-        }catch (Exception err){
-            err.printStackTrace();
-        }
-        return purchaseList;
-    }
-    public void showPurchaseData(){
-        ObservableList<Purchase> purchaseList=listPurchaseData();
-        purchase_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        purchase_col_invoice.setCellValueFactory(new PropertyValueFactory<>("invoice"));
-        purchase_col_shop_details.setCellValueFactory(new PropertyValueFactory<>("shopDetails"));
-        purchase_col_total_items.setCellValueFactory(new PropertyValueFactory<>("totalItems"));
-        purchase_col_total_amount.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
-        purchase_col_date_of_purchase.setCellValueFactory(new PropertyValueFactory<>("dateOfPurchase"));
-        purchase_table.setItems(purchaseList);
-        getTotalPurchaseAmount();
-    }
+    // }
+    // public void printPurchaseDetails(){
+    //     connection=Database.getInstance().connectDB();
+    //     String sql="SELECT * FROM purchase";
+    //     try{
+    //         JasperDesign jasperDesign= JRXmlLoader.load(this.getClass().getClassLoader().getResourceAsStream("jasper-reports/purchase_report.jrxml"));
+    //         JRDesignQuery updateQuery=new JRDesignQuery();
+    //         updateQuery.setText(sql);
+    //         jasperDesign.setQuery(updateQuery);
+    //         JasperReport jasperReport= JasperCompileManager.compileReport(jasperDesign);
+    //         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,null,connection);
+    //         JasperViewer.viewReport(jasperPrint ,false);
+    //     }catch (Exception err){
+    //         err.printStackTrace();
+    //     }
+    // }
+    // public ObservableList<Purchase> listPurchaseData(){
+    //     ObservableList<Purchase> purchaseList=FXCollections.observableArrayList();
+    //     connection=Database.getInstance().connectDB();
+    //     String sql="SELECT * FROM Purchase";
+    //     try{
+    //         statement=connection.createStatement();
+    //         resultSet=statement.executeQuery(sql);
+    //         Purchase purchase;
+    //         while (resultSet.next()){
+    //             purchase=new Purchase(Integer.parseInt(resultSet.getString("id")),resultSet.getString("invoice"),resultSet.getString("shop and address"),Integer.parseInt(resultSet.getString("total_items")),Double.parseDouble(resultSet.getString("total_amount")),resultSet.getString("date_of_purchase"));
+    //             purchaseList.addAll(purchase);
+    //         }
+    //     }catch (Exception err){
+    //         err.printStackTrace();
+    //     }
+    //     return purchaseList;
+    // }
+    // public void showPurchaseData(){
+    //     ObservableList<Purchase> purchaseList=listPurchaseData();
+    //     // purchase_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+    //     purchase_col_invoice.setCellValueFactory(new PropertyValueFactory<>("invoice"));
+    //     purchase_col_shop_details.setCellValueFactory(new PropertyValueFactory<>("shopDetails"));
+    //     purchase_col_total_items.setCellValueFactory(new PropertyValueFactory<>("totalItems"));
+    //     purchase_col_total_amount.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
+    //     purchase_col_date_of_purchase.setCellValueFactory(new PropertyValueFactory<>("dateOfPurchase"));
+    //     purchase_table.setItems(purchaseList);
+    //     getTotalPurchaseAmount();
+    // }
 
-    public void getTotalPurchase(){
-        connection=Database.getInstance().connectDB();
-        String sql="SELECT SUM(total_items) as total_purchase FROM PURCHASE";
-        try{
-            statement=connection.createStatement();
-            resultSet=statement.executeQuery(sql);
-            while (resultSet.next()){
-                String result=resultSet.getString("total_purchase");
-                if (result == null) {
-                    dash_total_purchase.setText("0");
-                }else{
-                    dash_total_purchase.setText(result);
-                }
-            }
-        }catch (Exception err){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeight(500);
-            alert.setTitle("Error Message");
-            alert.setHeaderText(null);
-            alert.setContentText(err.getMessage());
-            alert.showAndWait();
-        }
+    // public void getTotalPurchase(){
+    //     connection=Database.getInstance().connectDB();
+    //     String sql="SELECT SUM(total_items) as total_purchase FROM PURCHASE";
+    //     try{
+    //         statement=connection.createStatement();
+    //         resultSet=statement.executeQuery(sql);
+    //         while (resultSet.next()){
+    //             String result=resultSet.getString("total_purchase");
+    //             if (result == null) {
+    //                 dash_total_purchase.setText("0");
+    //             }else{
+    //                 dash_total_purchase.setText(result);
+    //             }
+    //         }
+    //     }catch (Exception err){
+    //         Alert alert = new Alert(Alert.AlertType.ERROR);
+    //         alert.setHeight(500);
+    //         alert.setTitle("Error Message");
+    //         alert.setHeaderText(null);
+    //         alert.setContentText(err.getMessage());
+    //         alert.showAndWait();
+    //     }
 
-    }
+    // }
 
     public void getTotalSales(){
         connection=Database.getInstance().connectDB();
@@ -1384,7 +1384,7 @@ public class DashboardController implements Initializable {
 
 
     public void showDashboardData(){
-     getTotalPurchase();
+    //  getTotalPurchase();
      getTotalSales();
      getTotalStocks();
      getSalesDetailsOfThisMonth();
@@ -1443,7 +1443,7 @@ public class DashboardController implements Initializable {
         showSalesData();
 
 //      Purchase Pane
-        showPurchaseData();
+        // showPurchaseData();
 
 //      INVENTORY PANE
 //        showInventoryData();

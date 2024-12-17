@@ -116,6 +116,49 @@ public class LoginController implements Initializable {
         }
     }
 
+    // buat method untuk redirect ke halaman register.fxml
+    public void register() throws Exception {
+        login_form.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    // buat method untuk redirect ke halaman login-view.fxml
+    public void loginView() throws Exception {
+        login_form.getScene().getWindow().hide();
+        Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    // buatkan method unutk melakukan register user
+    public void registerUser() {
+        connection = Database.getInstance().connectDB();
+        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username.getText());
+            preparedStatement.setString(2, password.getText());
+            preparedStatement.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Register Successful !");
+            alert.showAndWait();
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+    }
+    
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dropShowAffect();
