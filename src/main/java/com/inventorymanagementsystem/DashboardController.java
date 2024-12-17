@@ -315,7 +315,7 @@ public class DashboardController implements Initializable {
             billing_pane.setVisible(false);
             customer_pane.setVisible(false);
             sales_pane.setVisible(false);
-            purchase_pane.setVisible(false);
+//            purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
@@ -368,21 +368,21 @@ public class DashboardController implements Initializable {
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
 
         });
-        purchase_btn.setOnMouseClicked(mouseEvent -> {
-            dasboard_pane.setVisible(false);
-            billing_pane.setVisible(false);
-            customer_pane.setVisible(false);
-            sales_pane.setVisible(false);
-            purchase_pane.setVisible(true);
-            inventory_pane.setVisible(false);
-            dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
-            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-
-        });
+//        purchase_btn.setOnMouseClicked(mouseEvent -> {
+//            dasboard_pane.setVisible(false);
+//            billing_pane.setVisible(false);
+//            customer_pane.setVisible(false);
+//            sales_pane.setVisible(false);
+//            purchase_pane.setVisible(true);
+//            inventory_pane.setVisible(false);
+//            dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+//            billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+//            customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+//            sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+//            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
+//            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+//
+//        });
 
         inventory_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -1431,7 +1431,7 @@ public class DashboardController implements Initializable {
         showDashboardData();
 
 //      BILLING PANE
-        setAutoCompleteItemNumber();
+        // setAutoCompleteItemNumber();
         comboBoxQuantity();
         setInvoiceNum();
         showBillingData();
