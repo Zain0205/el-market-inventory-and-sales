@@ -780,9 +780,17 @@ public class DashboardController implements Initializable {
                       preparedStatement.setString(2, resultSet.getString("item_number")); // item yang dibeli
                       preparedStatement.executeUpdate();
 
+                      // Periksa status dan perbarui jika perlu
+                      String checkStatusSQL = "UPDATE products SET status = ? WHERE item_number = ? AND quantity <= 0";
+                      preparedStatement = connection.prepareStatement(checkStatusSQL);
+                      preparedStatement.setString(1, "Habis"); // Status baru
+                      preparedStatement.setString(2, resultSet.getString("item_number"));
+                      preparedStatement.executeUpdate();
+
                       count++;
                   }
                   if(count>0){
+                      updateStatusManually();
                       billClearCustomerData();
                       deleteBillingData();
                       showSalesData();
