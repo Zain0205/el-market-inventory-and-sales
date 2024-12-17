@@ -89,7 +89,7 @@ public class LoginController implements Initializable {
                 alert.setContentText("Login Successful !");
                 alert.showAndWait();
                 login_btn.getScene().getWindow().hide();
-                Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("dashboard_kasir.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage=new Stage();
 
