@@ -281,6 +281,12 @@ public class DashboardController implements Initializable {
     private TableColumn<Product, Double> inventory_col_price;
 
     @FXML
+    private TableColumn<?, String> inventory_col_status;
+
+    @FXML
+    private TableColumn<?, String> inventory_col_supplier;
+
+    @FXML
     private TextField inventory_field_item_number;
 
     @FXML
@@ -291,6 +297,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TextField inventory_field_price;
+
+    @FXML
+    private TextField inventory_field_supplier;
 
     @FXML
     private Button inventory_add_btn;
@@ -421,13 +430,30 @@ public class DashboardController implements Initializable {
     public List<Product> getItemsList(){
         productsList=new ArrayList<>();
         connection= Database.getInstance().connectDB();
-        String sql="SELECT * FROM PRODUCTS";
+        String sql="SELECT * FROM products";
         try{
             statement=connection.createStatement();
             resultSet=statement.executeQuery(sql);
             Product product;
             while (resultSet.next()){
-                product=new Product(Integer.parseInt(resultSet.getString("id")),resultSet.getString("item_number"),resultSet.getString("item_group"),Integer.parseInt(resultSet.getString("quantity")),Double.parseDouble(resultSet.getString("price")));
+                int quantity = resultSet.getInt("quantity");
+                String status;
+                if (quantity == 0) {
+                    status = "out of stock";
+                } else if (quantity < 10) {
+                    status = "low stock";
+                } else {
+                    status = "in stock";
+                }
+                product = new Product(
+                        Integer.parseInt(resultSet.getString("id")),
+                        resultSet.getString("item_number"),
+                        resultSet.getString("item_group"),
+                        quantity,
+                        Double.parseDouble(resultSet.getString("price")),
+                        status, // Pass status
+                        resultSet.getString("supplier") // Pass supplier
+                );
                 productsList.add(product);
             }
         }catch (Exception err){
@@ -746,6 +772,14 @@ public class DashboardController implements Initializable {
                       preparedStatement.setString(6,resultSet.getString("total_amount"));
                       preparedStatement.setString(7,bill_date.getValue().toString());
                       preparedStatement.executeUpdate();
+
+                      // Kurangi stok dari tabel products
+                      String updateStockSQL = "UPDATE products SET quantity = quantity - ? WHERE item_number = ?";
+                      preparedStatement = connection.prepareStatement(updateStockSQL);
+                      preparedStatement.setString(1, resultSet.getString("quantity")); // jumlah yang dibeli
+                      preparedStatement.setString(2, resultSet.getString("item_number")); // item yang dibeli
+                      preparedStatement.executeUpdate();
+
                       count++;
                   }
                   if(count>0){
@@ -1190,10 +1224,27 @@ public class DashboardController implements Initializable {
     }
 
     public void getTotalStocks(){
-        int totalPurchase=Integer.parseInt(dash_total_purchase.getText());
-        int total_sold= Integer.parseInt(dash_total_sold.getText());
-        int totalStockLeft=totalPurchase-total_sold;
-        dash_total_stocks.setText(String.valueOf(totalStockLeft));
+        connection = Database.getInstance().connectDB();
+        String sql = "SELECT SUM(quantity) AS total_quantity FROM products"; // Ganti query
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String result = resultSet.getString("total_quantity");
+                if (result == null) {
+                    dash_total_stocks.setText("0");
+                } else {
+                    dash_total_stocks.setText(result);
+                }
+            }
+        } catch (Exception err) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeight(500);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText(err.getMessage());
+            alert.showAndWait();
+        }
     }
 
     public void getSalesDetailsOfThisMonth(){
@@ -1263,7 +1314,9 @@ public class DashboardController implements Initializable {
                         resultSet.getString("item_number"),
                         resultSet.getString("item_group"),
                         resultSet.getInt("quantity"),
-                        resultSet.getDouble("price")
+                        resultSet.getDouble("price"),
+                        resultSet.getString("status"),   // Ambil status dari resultSet
+                        resultSet.getString("supplier")   // Ambil supplier dari resultSet
                 ));
             }
             inventory_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -1271,6 +1324,8 @@ public class DashboardController implements Initializable {
             inventory_col_item_group.setCellValueFactory(new PropertyValueFactory<>("itemGroup"));
             inventory_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             inventory_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+            inventory_col_status.setCellValueFactory(new PropertyValueFactory<>("status")); // Kolom Status
+            inventory_col_supplier.setCellValueFactory(new PropertyValueFactory<>("supplier")); // Kolom Supplier
 
             inventory_table.setItems(productList);
         } catch (Exception e) {
@@ -1281,7 +1336,8 @@ public class DashboardController implements Initializable {
         if (inventory_field_item_number.getText().isBlank() ||
                 inventory_field_item_group.getText().isBlank() ||
                 inventory_field_quantity.getText().isBlank() ||
-                inventory_field_price.getText().isBlank()) {
+                inventory_field_price.getText().isBlank() ||
+                inventory_field_supplier.getText().isBlank()) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Input Error");
@@ -1292,18 +1348,34 @@ public class DashboardController implements Initializable {
         }
 
         connection = Database.getInstance().connectDB();
-        String sql = "INSERT INTO products (item_number, item_group, quantity, price) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO products (item_number, item_group, quantity, price, supplier, status) VALUES (?, ?, ?, ?, ?, ?)";
+
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, inventory_field_item_number.getText());
             preparedStatement.setString(2, inventory_field_item_group.getText());
             preparedStatement.setInt(3, Integer.parseInt(inventory_field_quantity.getText()));
             preparedStatement.setDouble(4, Double.parseDouble(inventory_field_price.getText()));
+            preparedStatement.setString(5, inventory_field_supplier.getText()); // Ambil nilai supplier
+
+            // Tentukan status berdasarkan quantity
+            String status;
+            int quantity = Integer.parseInt(inventory_field_quantity.getText());
+            if (quantity == 0) {
+                status = "out of stock";
+            } else if (quantity < 10) {
+                status = "low stock";
+            } else {
+                status = "in stock";
+            }
+            preparedStatement.setString(6, status); // Pass status
 
             int result = preparedStatement.executeUpdate();
             if (result > 0) {
+                updateStatusManually();
                 showInventoryData();
                 clearInventoryFields();
+                getTotalStocks();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
@@ -1328,7 +1400,8 @@ public class DashboardController implements Initializable {
         if (inventory_field_item_number.getText().isBlank() ||
                 inventory_field_item_group.getText().isBlank() ||
                 inventory_field_quantity.getText().isBlank() ||
-                inventory_field_price.getText().isBlank()) {
+                inventory_field_price.getText().isBlank() ||
+                inventory_field_supplier.getText().isBlank()) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Input Error");
@@ -1339,7 +1412,7 @@ public class DashboardController implements Initializable {
         }
 
         connection = Database.getInstance().connectDB();
-        String sql = "UPDATE products SET item_number = ?, item_group = ?, quantity = ?, price = ? WHERE id = ?";
+        String sql = "UPDATE products SET item_number = ?, item_group = ?, quantity = ?, price = ?, supplier = ? WHERE id = ?";
         try {
             Product selectedProduct = inventory_table.getSelectionModel().getSelectedItem();
             preparedStatement = connection.prepareStatement(sql);
@@ -1347,18 +1420,49 @@ public class DashboardController implements Initializable {
             preparedStatement.setString(2, inventory_field_item_group.getText());
             preparedStatement.setInt(3, Integer.parseInt(inventory_field_quantity.getText()));
             preparedStatement.setDouble(4, Double.parseDouble(inventory_field_price.getText()));
-            preparedStatement.setInt(5, selectedProduct.getId());
+            preparedStatement.setString(5, inventory_field_supplier.getText()); // Pastikan ini benar
+
+            int quantity = Integer.parseInt(inventory_field_quantity.getText());
+
+            // Tentukan status berdasarkan quantity
+            String status;
+            if (quantity == 0) {
+                status = "out of stock";
+            } else if (quantity < 5) {
+                status = "low stock";
+            } else {
+                status = "in stock";
+            }
+
+//            preparedStatement.setString(6, status); // Memperbarui status
+            preparedStatement.setInt(6, selectedProduct.getId()); // ID item yang diupdate
 
             int result = preparedStatement.executeUpdate();
             if (result > 0) {
+                updateStatusManually();
                 showInventoryData();
                 clearInventoryFields();
+                getTotalStocks();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Item updated successfully!");
                 alert.showAndWait();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateStatusManually() {
+        String sql = "UPDATE products SET status = CASE " +
+                "WHEN quantity = 0 THEN 'out of stock' " +
+                "WHEN quantity < 10 THEN 'low stock' " +
+                "ELSE 'in stock' END";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1371,6 +1475,7 @@ public class DashboardController implements Initializable {
             inventory_field_item_group.setText(selectedProduct.getItemGroup());
             inventory_field_quantity.setText(String.valueOf(selectedProduct.getQuantity()));
             inventory_field_price.setText(String.valueOf(selectedProduct.getPrice()));
+            inventory_field_supplier.setText(selectedProduct.getSupplier());
         }
     }
 

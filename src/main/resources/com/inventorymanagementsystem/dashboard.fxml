@@ -69,7 +69,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="USER" size="1.2em" />
                      </graphic>
                   </Button>
-                  <Button fx:id="inventory_btn" layoutX="39.0" layoutY="480.0" mnemonicParsing="false" onAction="#activateAnchorPane" prefWidth="200.0" styleClass="navbutton" text="INVENTORY" textFill="WHITE">
+                  <Button fx:id="inventory_btn" layoutX="39.0" layoutY="484.0" mnemonicParsing="false" onAction="#activateAnchorPane" prefWidth="200.0" styleClass="navbutton" text="INVENTORY" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -424,21 +424,24 @@
                      </children></AnchorPane>
                   <AnchorPane fx:id="inventory_pane" layoutX="-1.0" layoutY="55.0" prefHeight="639.0" prefWidth="820.0" visible="false">
                      <children>
-                        <TableView fx:id="inventory_table" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="780.0" onMouseClicked="#selectInventoryTableData" stylesheets="dashboard.css">
+                        <TableView fx:id="inventory_table" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="780.0" onMouseClicked="#selectInventoryTableData" stylesheets="@dashboard.css">
                            <columns>
                               <TableColumn fx:id="inventory_col_id" text="ID" prefWidth="100.0" />
                               <TableColumn fx:id="inventory_col_item_number" text="Item Number" prefWidth="150.0" />
                               <TableColumn fx:id="inventory_col_item_group" text="Item Group" prefWidth="150.0" />
                               <TableColumn fx:id="inventory_col_quantity" text="Quantity" prefWidth="100.0" />
                               <TableColumn fx:id="inventory_col_price" text="Price" prefWidth="100.0" />
+                              <TableColumn fx:id="inventory_col_status" text="Status" prefWidth="100.0" />
+                              <TableColumn fx:id="inventory_col_supplier" text="Supplier" prefWidth="150.0" />
                            </columns>
                         </TableView>
                         <TextField fx:id="inventory_field_item_number" layoutX="20.0" layoutY="540.0" prefWidth="150.0" promptText="Item Number" />
                         <TextField fx:id="inventory_field_item_group" layoutX="180.0" layoutY="540.0" prefWidth="150.0" promptText="Item Group" />
                         <TextField fx:id="inventory_field_quantity" layoutX="340.0" layoutY="540.0" prefWidth="100.0" promptText="Quantity" />
                         <TextField fx:id="inventory_field_price" layoutX="450.0" layoutY="540.0" prefWidth="100.0" promptText="Price" />
-                        <Button fx:id="inventory_add_btn" layoutX="560.0" layoutY="540.0" prefWidth="80.0" text="Add" onAction="#addInventoryItem" />
-                        <Button fx:id="inventory_edit_btn" layoutX="650.0" layoutY="540.0" prefWidth="80.0" text="Edit" onAction="#editInventoryItem" />
+                        <TextField fx:id="inventory_field_supplier" layoutX="560.0" layoutY="540.0" prefWidth="150.0" promptText="Supplier" />
+                        <Button fx:id="inventory_add_btn" layoutX="560.0" layoutY="570.0" prefWidth="80.0" text="Add" onAction="#addInventoryItem" />
+                        <Button fx:id="inventory_edit_btn" layoutX="650.0" layoutY="570.0" prefWidth="80.0" text="Edit" onAction="#editInventoryItem" />
                      </children>
                   </AnchorPane>
                </children>
