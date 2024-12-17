@@ -11,6 +11,7 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Hyperlink?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="694.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventorymanagementsystem.LoginController">
     <children>
@@ -30,16 +31,21 @@
                                         <Font size="18.0" />
                                     </font>
                                 </PasswordField>
-                                <Label alignment="CENTER" layoutX="345.0" layoutY="262.0" prefHeight="44.0" prefWidth="166.0" text="Login" textFill="#000000">
+                                <Label alignment="CENTER" layoutX="345.0" layoutY="262.0" prefHeight="44.0" prefWidth="166.0" text="Register" textFill="#000000">
                                     <font>
                                         <Font name="Berlin Sans FB" size="48.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="login_btn" layoutX="325.0" layoutY="484.0" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="206.0" styleClass="login-button" stylesheets="@login.css" text="Login" textFill="WHITE">
+                                <Button fx:id="login_btn" layoutX="325.0" layoutY="484.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="50.0" prefWidth="206.0" styleClass="login-button" stylesheets="@login.css" text="Register" textFill="WHITE">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Button>
+                                <Hyperlink layoutX="345.0" layoutY="540.0" onAction="#loginView" text="Login" textFill="#000000">
+                                    <font>
+                                        <Font size="12.0" />
+                                    </font>
+                                </Hyperlink>
                                 <FontAwesomeIconView glyphName="USERS" layoutX="372.0" layoutY="234.0" selectionFill="#2f466b" size="98" text="" wrappingWidth="112.22855949401855" />
                                 <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="741.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" onMouseClicked="#onExit" onMouseDragged="#onExit" prefHeight="29.0" prefWidth="50.0" styleClass="close" stylesheets="@login.css">
                                     <graphic>
