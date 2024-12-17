@@ -6,13 +6,27 @@ public class Product {
     private String ItemGroup;
     private int quantity;
     private double price;
+    private String status;  // Tambahkan atribut status
+    private String supplier; // Tambahkan atribut supplier
 
-    public Product(int id, String itemNumber, String itemGroup, int quantity, double price) {
+
+    public Product(int id, String itemNumber, String itemGroup, int quantity, double price, String status, String supplier) {
         this.id = id;
         this.itemNumber = itemNumber;
-        ItemGroup = itemGroup;
+        this.ItemGroup = itemGroup;
         this.quantity = quantity;
         this.price = price;
+        this.status = status;
+        this.supplier = supplier;
+    }
+
+    // Getter and Setter untuk status dan supplier
+    public String getStatus() {
+        return status;
+    }
+
+    public String getSupplier() {
+        return supplier;
     }
 
     public int getId() {
