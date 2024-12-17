@@ -746,6 +746,14 @@ public class DashboardController implements Initializable {
                       preparedStatement.setString(6,resultSet.getString("total_amount"));
                       preparedStatement.setString(7,bill_date.getValue().toString());
                       preparedStatement.executeUpdate();
+
+                      // Kurangi stok dari tabel products
+                      String updateStockSQL = "UPDATE products SET quantity = quantity - ? WHERE item_number = ?";
+                      preparedStatement = connection.prepareStatement(updateStockSQL);
+                      preparedStatement.setString(1, resultSet.getString("quantity")); // jumlah yang dibeli
+                      preparedStatement.setString(2, resultSet.getString("item_number")); // item yang dibeli
+                      preparedStatement.executeUpdate();
+
                       count++;
                   }
                   if(count>0){
@@ -1190,10 +1198,27 @@ public class DashboardController implements Initializable {
     }
 
     public void getTotalStocks(){
-        int totalPurchase=Integer.parseInt(dash_total_purchase.getText());
-        int total_sold= Integer.parseInt(dash_total_sold.getText());
-        int totalStockLeft=totalPurchase-total_sold;
-        dash_total_stocks.setText(String.valueOf(totalStockLeft));
+        connection = Database.getInstance().connectDB();
+        String sql = "SELECT SUM(quantity) AS total_quantity FROM products"; // Ganti query
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String result = resultSet.getString("total_quantity");
+                if (result == null) {
+                    dash_total_stocks.setText("0");
+                } else {
+                    dash_total_stocks.setText(result);
+                }
+            }
+        } catch (Exception err) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeight(500);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText(err.getMessage());
+            alert.showAndWait();
+        }
     }
 
     public void getSalesDetailsOfThisMonth(){
