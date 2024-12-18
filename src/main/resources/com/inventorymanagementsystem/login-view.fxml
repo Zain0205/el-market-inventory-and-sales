@@ -50,7 +50,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="694.0" prefWidth="275.0" styleClass="login-bg" stylesheets="@login.css">
                      <children>
-                        <Label fx:id="f_logo" layoutX="34.0" layoutY="232.0" prefHeight="190.0" prefWidth="103.0" text="E">
+                        <Label fx:id="e_logo" layoutX="34.0" layoutY="232.0" prefHeight="190.0" prefWidth="103.0" text="EL">
                            <font>
                               <Font name="Engravers MT" size="60.0" />
                            </font>
@@ -59,7 +59,7 @@
                                  <stops>
                                     <Stop>
                                        <color>
-                                          <Color red="1.0" green="0.30980393290519714" blue="0.7607843279838562" />
+                                          <Color red="1.0" green="0.8431372549019608" blue="0.0" />
                                        </color>
                                     </Stop>
                                     <Stop offset="1.0">
@@ -71,7 +71,7 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <Label fx:id="c_logo" layoutX="138.0" layoutY="238.0" prefHeight="178.0" prefWidth="94.0" text="M">
+                        <Label fx:id="s_logo" layoutX="34.0" layoutY="300.0" prefHeight="178.0" prefWidth="300.0" text="STORE">
                            <font>
                               <Font name="Engravers MT" size="60.0" />
                            </font>
@@ -80,7 +80,7 @@
                                  <stops>
                                     <Stop>
                                        <color>
-                                          <Color red="1.0" green="0.30980393290519714" blue="0.7607843279838562" />
+                                          <Color red="1.0" green="0.8431372549019608" blue="0.0" />
                                        </color>
                                     </Stop>
                                     <Stop offset="1.0">

@@ -23,10 +23,10 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     @FXML
-    private Label c_logo;
+    private Label s_logo;
 
     @FXML
-    private Label f_logo;
+    private Label e_logo;
 
     @FXML
     private Button login_btn;
@@ -64,9 +64,9 @@ public class LoginController implements Initializable {
     }
 
     public void dropShowAffect(){
-        DropShadow original=new DropShadow(20, Color.valueOf("#ae44a5"));
-        f_logo.setEffect(original);
-        c_logo.setEffect(original);
+        DropShadow original=new DropShadow(20, Color.valueOf("99a23d"));
+        e_logo.setEffect(original);
+        s_logo.setEffect(original);
     }
 
     public void onExit(){

@@ -40,7 +40,7 @@ import java.util.Optional;
 import java.sql.SQLException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
+import javafx.scene.control.TextInputDialog;
 
 import static org.burningwave.core.assembler.StaticComponentContainer.Modules;
 
@@ -263,6 +263,9 @@ public class DashboardController implements Initializable {
     private Label dash_total_stocks;
 
     @FXML
+    private Label dash_low_stock_items;
+
+    @FXML
     private Button inventory_btn;
 
     @FXML
@@ -313,7 +316,24 @@ public class DashboardController implements Initializable {
     @FXML
     private Button inventory_edit_btn;
 
-
+    @FXML
+    private Button user_btn;
+    @FXML
+    private Button add_user_btn;
+    @FXML
+    private Button edit_user_btn;
+    @FXML
+    private Button delete_user_btn;
+    @FXML
+    private AnchorPane user_pane;
+    @FXML
+    private TableView<User> user_table; // Pastikan ini sesuai dengan fx:id di FXML
+    @FXML
+    private TableColumn<User, Integer> user_col_id;
+    @FXML
+    private TableColumn<User, String> user_col_username;
+    @FXML
+    private TableColumn<User, String> user_col_password;
 
     @FXML
     private Button signout_btn;
@@ -332,12 +352,14 @@ public class DashboardController implements Initializable {
             sales_pane.setVisible(false);
             purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
+            user_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         billing_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -346,12 +368,14 @@ public class DashboardController implements Initializable {
             sales_pane.setVisible(false);
             purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
+            user_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         customer_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -360,13 +384,14 @@ public class DashboardController implements Initializable {
             sales_pane.setVisible(false);
             purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
+            user_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-
+            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         sales_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -375,13 +400,14 @@ public class DashboardController implements Initializable {
             sales_pane.setVisible(true);
             purchase_pane.setVisible(false);
             inventory_pane.setVisible(false);
+            user_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-
+            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
         purchase_btn.setOnMouseClicked(mouseEvent -> {
             dasboard_pane.setVisible(false);
@@ -390,13 +416,14 @@ public class DashboardController implements Initializable {
             sales_pane.setVisible(false);
             purchase_pane.setVisible(true);
             inventory_pane.setVisible(false);
+            user_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
-
+            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
         });
 
         inventory_btn.setOnMouseClicked(mouseEvent -> {
@@ -406,18 +433,34 @@ public class DashboardController implements Initializable {
             sales_pane.setVisible(false);
             purchase_pane.setVisible(false);
             inventory_pane.setVisible(true);
-
+            user_pane.setVisible(false);
             dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
-
+            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
             showInventoryData();
         });
 
-
+        user_btn.setOnMouseClicked(mouseEvent -> {
+            dasboard_pane.setVisible(false);
+            billing_pane.setVisible(false);
+            customer_pane.setVisible(false);
+            sales_pane.setVisible(false);
+            purchase_pane.setVisible(false);
+            inventory_pane.setVisible(false);
+            user_pane.setVisible(true);
+            dashboard_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            billing_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            customer_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            sales_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            purchase_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            inventory_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(0, 0, 0, 0.8), rgba(193, 193, 193, 0.2))");
+            user_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , rgba(239, 239, 239, 0.7), rgba(101, 101, 101, 0.7))");
+            showUserData();
+        });
     }
 
     public void setUsername(){
@@ -431,6 +474,152 @@ public class DashboardController implements Initializable {
         sales_pane.setVisible(false);
         purchase_pane.setVisible(false);
         inventory_pane.setVisible(false);
+    }
+
+    public void showUserData() {
+        ObservableList<User> userList = FXCollections.observableArrayList();
+        connection = Database.getInstance().connectDB(); // Menghubungkan ke database
+
+        String sql = "SELECT * FROM users"; // Asumsikan table nama "users"
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                userList.add(new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password")
+                ));
+            }
+
+            user_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            user_col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+            user_col_password.setCellValueFactory(new PropertyValueFactory<>("password"));
+
+            user_table.setItems(userList); // Mengisi tabel dengan data pengguna
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void addUser() {
+        // Set up a dialog or input form to get new user information
+        TextInputDialog usernameDialog = new TextInputDialog();
+        usernameDialog.setTitle("Add User");
+        usernameDialog.setHeaderText("Enter new username:");
+
+        Optional<String> usernameResult = usernameDialog.showAndWait();
+        usernameResult.ifPresent(username -> {
+            if (username != null && !username.isEmpty()) {
+                TextInputDialog passwordDialog = new TextInputDialog();
+                passwordDialog.setTitle("Add User");
+                passwordDialog.setHeaderText("Enter password for new user:");
+
+                Optional<String> passwordResult = passwordDialog.showAndWait();
+                passwordResult.ifPresent(password -> {
+                    if (password != null && !password.isEmpty()) {
+                        String insertSql = "INSERT INTO users (username, password) VALUES (?, ?)";
+                        try {
+                            preparedStatement = connection.prepareStatement(insertSql);
+                            preparedStatement.setString(1, username);
+                            preparedStatement.setString(2, password); // Menggunakan password yang diberikan
+                            preparedStatement.executeUpdate();
+                            showUserData(); // Refresh user data in the table
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    @FXML
+    private void editUser() {
+        User selectedUser = user_table.getSelectionModel().getSelectedItem();
+
+        if (selectedUser == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a user to edit.");
+            alert.showAndWait();
+            return;
+        }
+
+        TextInputDialog usernameDialog = new TextInputDialog(selectedUser.getUsername());
+        usernameDialog.setTitle("Edit User");
+        usernameDialog.setHeaderText("Edit username:");
+
+        Optional<String> usernameResult = usernameDialog.showAndWait();
+        usernameResult.ifPresent(newUsername -> {
+            if (newUsername != null && !newUsername.isEmpty()) {
+                TextInputDialog passwordDialog = new TextInputDialog();
+                passwordDialog.setTitle("Edit User");
+                passwordDialog.setHeaderText("Enter new password (leave blank to keep current one):");
+
+                Optional<String> passwordResult = passwordDialog.showAndWait();
+                String newPassword = passwordResult.orElse(selectedUser.getPassword()); // Jika tidak diisi, gunakan password lama
+
+                String updateSql = "UPDATE users SET username = ?, password = ? WHERE id = ?";
+                try {
+                    preparedStatement = connection.prepareStatement(updateSql);
+                    preparedStatement.setString(1, newUsername);
+                    preparedStatement.setString(2, newPassword); // Menggunakan password baru
+                    preparedStatement.setInt(3, selectedUser.getId());
+                    preparedStatement.executeUpdate();
+                    showUserData(); // Refresh user data in the table
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @FXML
+    private void deleteUser() {
+        User selectedUser = user_table.getSelectionModel().getSelectedItem();
+
+        if (selectedUser == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a user to delete.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Cek jika user ID = 1
+        if (selectedUser.getId() == 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("User with ID 1 cannot be deleted.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Tampilkan konfirmasi sebelum menghapus
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Deletion");
+        confirmation.setHeaderText(null);
+        confirmation.setContentText("Are you sure you want to delete this user?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            String deleteSql = "DELETE FROM users WHERE id = ?";
+            try {
+                preparedStatement = connection.prepareStatement(deleteSql);
+                preparedStatement.setInt(1, selectedUser.getId());
+                preparedStatement.executeUpdate();
+                showUserData(); // Refresh user data in the table
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public List<Product> getItemsList(){
@@ -1439,6 +1628,23 @@ public class DashboardController implements Initializable {
         }
     }
 
+    public void updateLowStockCount() {
+        connection = Database.getInstance().connectDB(); // Menghubungkan ke database
+        String sql = "SELECT COUNT(*) AS low_stock_count FROM products WHERE status = 'low stock'"; // Query untuk menghitung low stock
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                int lowStockCount = resultSet.getInt("low_stock_count");
+                dash_low_stock_items.setText(String.valueOf(lowStockCount)); // Memperbarui label dengan jumlah low stock items
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void getSalesDetailsOfThisMonth(){
         LocalDate date=LocalDate.now();
         String monthName=date.getMonth().toString();
@@ -1493,6 +1699,7 @@ public class DashboardController implements Initializable {
             alert.showAndWait();
         }
     }
+
     public void showInventoryData() {
         ObservableList<Product> productList = FXCollections.observableArrayList();
         connection = Database.getInstance().connectDB();
@@ -1524,6 +1731,7 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void addInventoryItem() {
         if (inventory_field_item_number.getText().isBlank() ||
                 inventory_field_item_group.getText().isBlank() ||
@@ -1741,7 +1949,7 @@ public class DashboardController implements Initializable {
 
 
     public void showDashboardData(){
-     getTotalPurchase();
+        updateLowStockCount();
      getTotalSales();
      getTotalStocks();
      getSalesDetailsOfThisMonth();
@@ -1782,7 +1990,9 @@ public class DashboardController implements Initializable {
         Modules.exportAllToAll();
 
         setUsername();
+        showUserData();
         activateDashboard();
+        updateLowStockCount();
 
 //      DASHBOARD PANE
         showDashboardData();
