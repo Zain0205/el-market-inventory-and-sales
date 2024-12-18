@@ -299,6 +299,9 @@
                               <Font name="Dubai Bold" size="18.0" />
                            </font>
                         </Label>
+<!--                        <Button fx:id="btn_increase" layoutX="600.0" layoutY="388.0" text="+" onAction="#increaseQuantity"/>-->
+<!--                        <Button fx:id="btn_decrease" layoutX="550.0" layoutY="388.0" text="-" onAction="#decreaseQuantity"/>-->
+<!--                        <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" prefHeight="32.0" promptText="Enter Quantity" styleClass="textfield" />-->
                         <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" onAction="#onInputTextChanged" prefHeight="32.0" prefWidth="180.0" promptText="Enter Quanity" styleClass="textfield" stylesheets="@dashboard.css" />
                         <Button fx:id="bill_update" alignment="CENTER" layoutX="682.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#updateSelectedBillingData" prefHeight="38.0" prefWidth="50.0" styleClass="add" stylesheets="@dashboard.css">
                            <graphic>
