@@ -148,7 +148,6 @@ public class LoginController implements Initializable {
     }
 
 
-    // buat method untuk redirect ke halaman login-view.fxml
     public void loginView() throws Exception {
         login_form.getScene().getWindow().hide();
         Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
@@ -159,7 +158,6 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
-    // buatkan method unutk melakukan register user
     public void registerUser() {
         connection = Database.getInstance().connectDB();
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -176,6 +174,7 @@ public class LoginController implements Initializable {
         } catch (Exception err) {
             err.printStackTrace();
     }
+
 }
 
     @Override
