@@ -35,6 +35,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+import java.util.Optional;
+
+import java.sql.SQLException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 
 import static org.burningwave.core.assembler.StaticComponentContainer.Modules;
 
@@ -1459,6 +1465,63 @@ public class DashboardController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private Button inventory_delete_btn; // Tambahkan Button untuk hapus di FXML
+
+    public void deleteInventoryItem() {
+        Product selectedProduct = inventory_table.getSelectionModel().getSelectedItem();
+
+        if (selectedProduct == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setHeaderText(null);
+            alert.setContentText("Silakan pilih item untuk dihapus.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Menampilkan konfirmasi
+        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirm.setTitle("Konfirmasi Hapus");
+        alertConfirm.setHeaderText(null);
+        alertConfirm.setContentText("Apakah anda yakin untuk menghapus item ini dari inventory?");
+
+        Optional<ButtonType> result = alertConfirm.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Jika pilihan "Ya": Hapus item dari database
+            connection = Database.getInstance().connectDB();
+            String sql = "DELETE FROM products WHERE id = ?";
+
+            try {
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, selectedProduct.getId()); // ID item yang dihapus
+
+                int rowAffected = preparedStatement.executeUpdate();
+                if (rowAffected > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Sukses");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Item berhasil dihapus dari inventory.");
+                    alert.showAndWait();
+                    showInventoryData(); // Memperbarui tabel
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Gagal menghapus item. Silahkan coba lagi.");
+                    alert.showAndWait();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Terjadi kesalahan saat menghapus item: " + e.getMessage());
+                alert.showAndWait();
+            }
         }
     }
 
