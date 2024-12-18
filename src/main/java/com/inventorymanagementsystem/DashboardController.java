@@ -118,7 +118,7 @@ public class DashboardController implements Initializable {
     private Button bill_print;
 
     @FXML
-    private ComboBox<?> bill_quantity;
+    private ComboBox<String> bill_quantity;
 
     @FXML
     private Button bill_save;
@@ -630,6 +630,64 @@ public class DashboardController implements Initializable {
             final_amount.setText("0.00");
         }
 
+    }
+
+    @FXML
+    private TableView<Product> products_table; // TableView untuk produk
+
+    @FXML
+    private TableColumn<Product, String> col_product_item_number;
+
+    @FXML
+    private TableColumn<Product, Double> col_product_price;
+
+    @FXML
+    private TableColumn<Product, Integer> col_product_stock;
+
+    public void showProductsData() {
+        ObservableList<Product> productList = FXCollections.observableArrayList();
+        connection = Database.getInstance().connectDB();
+        String sql = "SELECT * FROM products"; // Ambil data yang diperlukan
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                productList.add(new Product(
+                        resultSet.getInt("id"),
+                        resultSet.getString("item_number"),
+                        resultSet.getString("item_group"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("status"),   // Ambil status dari resultSet
+                        resultSet.getString("supplier")   // Ambil supplier dari resultSet
+                ));
+            }
+
+            col_product_item_number.setCellValueFactory(new PropertyValueFactory<>("itemNumber"));
+            col_product_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+            col_product_stock.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+            products_table.setItems(productList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // Listener untuk mengisi field ketika row dipilih
+    @FXML
+    public void selectProductRow() {
+        Product selectedProduct = products_table.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            bill_item.setText(selectedProduct.getItemNumber());
+            bill_price.setText(String.valueOf(selectedProduct.getPrice()));
+            bill_quantity.setValue("1"); // Set default quantity to 1
+        } else {
+            // Pastikan jika tidak ada produk terpilih
+            bill_item.clear();
+            bill_price.clear();
+            bill_quantity.setValue(null);
+        }
     }
 
     public void billClearCustomerData(){
@@ -1388,6 +1446,7 @@ public class DashboardController implements Initializable {
             if (result > 0) {
                 updateStatusManually();
                 showInventoryData();
+                showProductsData();
                 clearInventoryFields();
                 getTotalStocks();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -1455,6 +1514,7 @@ public class DashboardController implements Initializable {
             if (result > 0) {
                 updateStatusManually();
                 showInventoryData();
+                showProductsData();
                 clearInventoryFields();
                 getTotalStocks();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -1506,7 +1566,8 @@ public class DashboardController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("Item berhasil dihapus dari inventory.");
                     alert.showAndWait();
-                    showInventoryData(); // Memperbarui tabel
+                    showInventoryData();
+                    showProductsData();// Memperbarui tabel
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -1611,6 +1672,7 @@ public class DashboardController implements Initializable {
         comboBoxQuantity();
         setInvoiceNum();
         showBillingData();
+        showProductsData();
 
 //      CUSTOMER PANE
         showCustomerData();
