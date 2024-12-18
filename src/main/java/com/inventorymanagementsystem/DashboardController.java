@@ -496,6 +496,7 @@ public class DashboardController implements Initializable {
             err.printStackTrace();
         }
     }
+
     public void setAutoCompleteItemNumber(){
         getItemsList();
         List<String> itemNumberList=productsList.stream().map(Product::getItemNumber).collect(Collectors.toList());
@@ -503,20 +504,45 @@ public class DashboardController implements Initializable {
         TextFields.bindAutoCompletion(bill_item,observableItemList);
     }
 
-    public void comboBoxQuantity(){
-        List<String> list=new ArrayList<>();
-        for(String quantity:quantityList){
-            list.add(quantity);
+    public void comboBoxQuantity() {
+//        ObservableList<String> comboList = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11");
+//        bill_quantity.setItems(comboList);
+        bill_quantity.setEditable(true); // Untuk mengizinkan input manual
+        // Listener untuk mendeteksi perubahan input
+        bill_quantity.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) { // Memastikan tidak kosong
+                checkForPriceandQuantity(); // Panggil untuk menghitung total amount
+            }
+        });
+    }
+
+    @FXML
+    private void increaseQuantity() {
+        int currentQuantity = 1; // Default quantity, bisa di-update jika item sudah dipilih
+        if (bill_quantity.getSelectionModel().getSelectedItem() != null) {
+            currentQuantity = Integer.parseInt(bill_quantity.getValue().toString());
         }
-        ObservableList comboList= FXCollections.observableArrayList(list);
-        bill_quantity.setItems(comboList);
+        bill_quantity.setValue(String.valueOf(currentQuantity + 1));
+        checkForPriceandQuantity(); // Memperbarui total amount jika perlu
+    }
+
+    @FXML
+    private void decreaseQuantity() {
+        int currentQuantity = 1; // Default quantity, bisa di-update jika item sudah dipilih
+        if (bill_quantity.getSelectionModel().getSelectedItem() != null) {
+            currentQuantity = Integer.parseInt(bill_quantity.getValue().toString());
+            if (currentQuantity > 1) { // Mencegah quantity menjadi kurang dari 1
+                bill_quantity.setValue(String.valueOf(currentQuantity - 1));
+                checkForPriceandQuantity(); // Memperbarui total amount jika perlu
+            }
+        }
     }
 
     public void checkForPriceandQuantity(){
-        if (!bill_price.getText().isBlank() && !bill_quantity.getSelectionModel().isEmpty()) {
+        if (!bill_price.getText().isBlank() && bill_quantity.getEditor().getText() != null && !bill_quantity.getEditor().getText().isBlank()) {
             try {
                 int price = Integer.parseInt(bill_price.getText());
-                int quantity = Integer.parseInt(bill_quantity.getValue().toString());
+                int quantity = Integer.parseInt(bill_quantity.getEditor().getText());
                 int totalAmount = price * quantity;
                 bill_total_amount.setText(String.valueOf(totalAmount));
             } catch (NumberFormatException e) {
@@ -526,6 +552,7 @@ public class DashboardController implements Initializable {
             bill_total_amount.setText("0");
         }
     }
+
     public void getPriceOfTheItem(){
         try {
             Product product = productsList.stream().filter(prod -> prod.getItemNumber().equals(bill_item.getText())).findAny().orElse(null);
@@ -567,19 +594,23 @@ public class DashboardController implements Initializable {
         });
     }
 
-    public void addBillingData(){
-        if(bill_item.getText().isBlank()||bill_quantity.getSelectionModel().isEmpty()||bill_price.getText().isBlank()||bill_total_amount.getText().isBlank()){
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+    public void addBillingData() {
+        if (bill_item.getText().isBlank() ||
+                bill_quantity.getEditor().getText().isBlank() ||
+                bill_price.getText().isBlank() ||
+                bill_total_amount.getText().isBlank()) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Message");
             alert.setHeaderText(null);
-            alert.setContentText("Please fill the mandatory data such as item number, quantity and price .");
+            alert.setContentText("Please fill the mandatory data such as item number, quantity, and price.");
             alert.showAndWait();
             return;
         }
-        connection=Database.getInstance().connectDB();
-//        String sql="INSERT INTO BILLING(item_number,quantity,price,total_amount)VALUES(?,?,?,?)";
 
-        try{
+        connection = Database.getInstance().connectDB();
+
+        try {
             // Cek stok sebelum menambahkan ke billing
             String checkStockSql = "SELECT quantity FROM products WHERE item_number = ?";
             preparedStatement = connection.prepareStatement(checkStockSql);
@@ -588,7 +619,7 @@ public class DashboardController implements Initializable {
 
             if (stockResult.next()) {
                 int availableQuantity = stockResult.getInt("quantity");
-                int quantityToAdd = Integer.parseInt(bill_quantity.getValue().toString());
+                int quantityToAdd = Integer.parseInt(bill_quantity.getEditor().getText()); // Ambil dari editor
 
                 // Periksa apakah stok cukup
                 if (availableQuantity < quantityToAdd) {
@@ -612,7 +643,7 @@ public class DashboardController implements Initializable {
             String sql = "INSERT INTO BILLING(item_number, quantity, price, total_amount) VALUES (?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, bill_item.getText());
-            preparedStatement.setString(2, bill_quantity.getValue().toString());
+            preparedStatement.setInt(2, Integer.parseInt(bill_quantity.getEditor().getText())); // Dari editor
             preparedStatement.setString(3, bill_price.getText());
             preparedStatement.setString(4, bill_total_amount.getText());
 
@@ -628,11 +659,10 @@ public class DashboardController implements Initializable {
                 alert.setContentText("Failed to add billing data.");
                 alert.showAndWait();
             }
-        }catch (Exception err){
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
-
     public ObservableList<Billing> listBilligData(){
         ObservableList<Billing> billingList=FXCollections.observableArrayList();
         connection=Database.getInstance().connectDB();
