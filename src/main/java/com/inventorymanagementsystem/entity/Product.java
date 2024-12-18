@@ -20,6 +20,9 @@ public class Product {
         this.supplier = supplier;
     }
 
+    public Product(int anInt, String itemNumber, double price, int quantity) {
+    }
+
     // Getter and Setter untuk status dan supplier
     public String getStatus() {
         return status;

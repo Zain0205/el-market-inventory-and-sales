@@ -192,13 +192,20 @@
                      </children></AnchorPane>
                   <AnchorPane fx:id="billing_pane" layoutX="-1.0" layoutY="55.0" prefHeight="639.0" prefWidth="820.0" stylesheets="@dashboard.css">
                      <children>
-                        <TableView fx:id="billing_table" layoutX="13.0" layoutY="59.0" onMouseClicked="#selectBillingTableData" prefHeight="280.0" prefWidth="794.0" stylesheets="@dashboard.css">
+                        <TableView fx:id="billing_table" layoutX="13.0" layoutY="59.0" onMouseClicked="#selectBillingTableData" prefHeight="280.0" prefWidth="394.0" stylesheets="@dashboard.css">
                           <columns>
-                              <TableColumn fx:id="col_bill_item_num" prefWidth="254.4000244140625" text="Item Number" />
-                              <TableColumn fx:id="col_bill_quantity" prefWidth="189.5999755859375" text="Quantity" />
-                              <TableColumn fx:id="col_bill_price" prefWidth="150.4000244140625" text="Price" />
+                              <TableColumn fx:id="col_bill_item_num" prefWidth="180" text="Item Number" />
+                              <TableColumn fx:id="col_bill_quantity" prefWidth="100" text="Quantity" />
+                              <TableColumn fx:id="col_bill_price" prefWidth="140" text="Price" />
                               <TableColumn fx:id="col_bill_total_amt" minWidth="0.0" prefWidth="197.60001220703123" text="Total Amount" />
                           </columns>
+                        </TableView>
+                        <TableView fx:id="products_table" layoutX="413.0" layoutY="59.0" prefHeight="280.0" prefWidth="394.0" onMouseClicked="#selectProductRow">
+                           <columns>
+                              <TableColumn fx:id="col_product_item_number" prefWidth="170.0" text="Item Number" />
+                              <TableColumn fx:id="col_product_price" prefWidth="140.0" text="Price" />
+                              <TableColumn fx:id="col_product_stock" prefWidth="100.0" text="Stock" />
+                           </columns>
                         </TableView>
                         <TextField fx:id="billing_table_search" layoutX="12.0" layoutY="13.0" prefHeight="36.0" prefWidth="236.0" promptText="Search" styleClass="search-billing" stylesheets="@dashboard.css" />
                         <FontAwesomeIconView glyphName="SEARCH" layoutX="21.0" layoutY="37.0" size="18.0" wrappingWidth="14.857142448425293" />
@@ -292,7 +299,10 @@
                               <Font name="Dubai Bold" size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" onAction="#onInputTextChanged" prefHeight="32.0" prefWidth="180.0" promptText="Enter Quanity" styleClass="textfield" stylesheets="@dashboard.css" />
+                        <Button fx:id="btn_increase" layoutX="770.0" layoutY="388.0" text="+" onAction="#increaseQuantity"/>
+                        <Button fx:id="btn_decrease" layoutX="740.0" layoutY="388.0" text="-" onAction="#decreaseQuantity"/>
+                        <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" prefHeight="32.0" promptText="Enter Quantity" styleClass="textfield" />
+<!--                        <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" onAction="#onInputTextChanged" prefHeight="32.0" prefWidth="180.0" promptText="Enter Quanity" styleClass="textfield" stylesheets="@dashboard.css" />-->
                         <Button fx:id="bill_update" alignment="CENTER" layoutX="682.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#updateSelectedBillingData" prefHeight="38.0" prefWidth="50.0" styleClass="add" stylesheets="@dashboard.css">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24.0" />
@@ -426,10 +436,10 @@
                      <children>
                         <TableView fx:id="inventory_table" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="780.0" onMouseClicked="#selectInventoryTableData" stylesheets="@dashboard.css">
                            <columns>
-                              <TableColumn fx:id="inventory_col_id" text="ID" prefWidth="100.0" />
+                              <TableColumn fx:id="inventory_col_id" text="ID" prefWidth="70.0" />
                               <TableColumn fx:id="inventory_col_item_number" text="Item Number" prefWidth="150.0" />
                               <TableColumn fx:id="inventory_col_item_group" text="Item Group" prefWidth="150.0" />
-                              <TableColumn fx:id="inventory_col_quantity" text="Quantity" prefWidth="100.0" />
+                              <TableColumn fx:id="inventory_col_quantity" text="Quantity" prefWidth="80.0" />
                               <TableColumn fx:id="inventory_col_price" text="Price" prefWidth="100.0" />
                               <TableColumn fx:id="inventory_col_status" text="Status" prefWidth="100.0" />
                               <TableColumn fx:id="inventory_col_supplier" text="Supplier" prefWidth="150.0" />
@@ -440,8 +450,9 @@
                         <TextField fx:id="inventory_field_quantity" layoutX="340.0" layoutY="540.0" prefWidth="100.0" promptText="Quantity" />
                         <TextField fx:id="inventory_field_price" layoutX="450.0" layoutY="540.0" prefWidth="100.0" promptText="Price" />
                         <TextField fx:id="inventory_field_supplier" layoutX="560.0" layoutY="540.0" prefWidth="150.0" promptText="Supplier" />
-                        <Button fx:id="inventory_add_btn" layoutX="560.0" layoutY="570.0" prefWidth="80.0" text="Add" onAction="#addInventoryItem" />
-                        <Button fx:id="inventory_edit_btn" layoutX="650.0" layoutY="570.0" prefWidth="80.0" text="Edit" onAction="#editInventoryItem" />
+                        <Button fx:id="inventory_add_btn" layoutX="450.0" layoutY="580.0" prefWidth="80.0" text="Add" onAction="#addInventoryItem" />
+                        <Button fx:id="inventory_edit_btn" layoutX="540.0" layoutY="580.0" prefWidth="80.0" text="Edit" onAction="#editInventoryItem" />
+                        <Button fx:id="inventory_delete_btn" layoutX="630.0" layoutY="580.0" prefWidth="80.0" text="Hapus" onAction="#deleteInventoryItem" />
                      </children>
                   </AnchorPane>
                </children>

@@ -161,7 +161,7 @@
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Fashion Club]]></text>
+					<text><![CDATA[EL MARKET]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="0a399baa-bad3-4b1a-9fe3-bb1c563e6a27"/>
