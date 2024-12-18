@@ -1164,6 +1164,7 @@ public class DashboardController implements Initializable {
                     deleteBillingData();
                     showSalesData();
                     showProductsData();
+                    updateLowStockCount();
                     setInvoiceNum();
                     showDashboardData();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -1773,6 +1774,7 @@ public class DashboardController implements Initializable {
             int result = preparedStatement.executeUpdate();
             if (result > 0) {
                 updateStatusManually();
+                updateLowStockCount();
                 showInventoryData();
                 showProductsData();
                 clearInventoryFields();
@@ -1841,6 +1843,7 @@ public class DashboardController implements Initializable {
             int result = preparedStatement.executeUpdate();
             if (result > 0) {
                 updateStatusManually();
+                updateLowStockCount();
                 showInventoryData();
                 showProductsData();
                 clearInventoryFields();
@@ -1895,6 +1898,7 @@ public class DashboardController implements Initializable {
                     alert.setContentText("Item berhasil dihapus dari inventory.");
                     alert.showAndWait();
                     showInventoryData();
+                    updateLowStockCount();
                     showProductsData();// Memperbarui tabel
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);

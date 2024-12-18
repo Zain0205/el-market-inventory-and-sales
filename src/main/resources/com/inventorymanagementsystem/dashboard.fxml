@@ -226,7 +226,12 @@
                               <TableColumn fx:id="col_bill_total_amt" minWidth="0.0" prefWidth="197.60001220703123" text="Total Amount" />
                           </columns>
                         </TableView>
-                        <TableView fx:id="products_table" layoutX="413.0" layoutY="59.0" prefHeight="280.0" prefWidth="394.0" onMouseClicked="#selectProductRow">
+                        <Label layoutX="433" layoutY="64" text="Item List">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="16"/>
+                           </font>
+                        </Label>
+                        <TableView fx:id="products_table" layoutX="413.0" layoutY="89.0" prefHeight="250.0" prefWidth="394.0" onMouseClicked="#selectProductRow">
                            <columns>
                               <TableColumn fx:id="col_product_item_number" prefWidth="170.0" text="Item Number" />
                               <TableColumn fx:id="col_product_price" prefWidth="140.0" text="Price" />
