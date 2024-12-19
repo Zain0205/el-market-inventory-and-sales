@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="694.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventorymanagementsystem.DashboardController">
+<AnchorPane prefHeight="694.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventorymanagementsystem.DashboardUserController">
     <children>
         <AnchorPane prefHeight="694.0" prefWidth="1080.0">
             <children>
@@ -132,20 +132,22 @@
                                         </Label>
                                     </children>
                                 </Pane>
+
                                 <Pane layoutX="569.0" layoutY="47.0" prefHeight="200.0" prefWidth="227.0" styleClass="dasboard_box" stylesheets="@dashboard.css">
                                     <children>
-                                        <Label layoutX="11.0" layoutY="31.0" text="TOTAL ITEMS BOUGHT" textFill="WHITE">
+                                        <Label layoutX="25.0" layoutY="31.0" text="LOW STOCK ITEMS" alignment="CENTER" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="dash_total_purchase" alignment="CENTER" layoutX="17.0" layoutY="82.0" prefHeight="36.0" prefWidth="200.0" text="50" textFill="WHITE">
+                                        <Label fx:id="dash_low_stock_items" alignment="CENTER" layoutX="17.0" layoutY="82.0" prefHeight="36.0" prefWidth="200.0" text="50" textFill="WHITE">
                                             <font>
                                                 <Font name="Arial Rounded MT Bold" size="30.0" />
                                             </font>
                                         </Label>
                                     </children>
                                 </Pane>
+
                                 <Pane layoutX="134.0" layoutY="347.0" prefHeight="200.0" prefWidth="294.0" styleClass="dasboard_box" stylesheets="@dashboard.css">
                                     <children>
                                         <Label alignment="CENTER" layoutX="35.0" layoutY="21.0" prefHeight="22.0" prefWidth="220.0" text="SALES THIS MONTH" textFill="WHITE">
@@ -192,12 +194,24 @@
                             </children></AnchorPane>
                         <AnchorPane fx:id="billing_pane" layoutX="-1.0" layoutY="55.0" prefHeight="639.0" prefWidth="820.0" stylesheets="@dashboard.css">
                             <children>
-                                <TableView fx:id="billing_table" layoutX="13.0" layoutY="59.0" onMouseClicked="#selectBillingTableData" prefHeight="280.0" prefWidth="794.0" stylesheets="@dashboard.css">
+                                <TableView fx:id="billing_table" layoutX="13.0" layoutY="59.0" onMouseClicked="#selectBillingTableData" prefHeight="280.0" prefWidth="394.0" stylesheets="@dashboard.css">
                                     <columns>
-                                        <TableColumn fx:id="col_bill_item_num" prefWidth="254.4000244140625" text="Item Number" />
-                                        <TableColumn fx:id="col_bill_quantity" prefWidth="189.5999755859375" text="Quantity" />
-                                        <TableColumn fx:id="col_bill_price" prefWidth="150.4000244140625" text="Price" />
+                                        <TableColumn fx:id="col_bill_item_num" prefWidth="180" text="Item Number" />
+                                        <TableColumn fx:id="col_bill_quantity" prefWidth="100" text="Quantity" />
+                                        <TableColumn fx:id="col_bill_price" prefWidth="140" text="Price" />
                                         <TableColumn fx:id="col_bill_total_amt" minWidth="0.0" prefWidth="197.60001220703123" text="Total Amount" />
+                                    </columns>
+                                </TableView>
+                                <Label layoutX="433" layoutY="64" text="Item List">
+                                    <font>
+                                        <Font name="Arial Rounded MT Bold" size="16"/>
+                                    </font>
+                                </Label>
+                                <TableView fx:id="products_table" layoutX="413.0" layoutY="89.0" prefHeight="250.0" prefWidth="394.0" onMouseClicked="#selectProductRow">
+                                    <columns>
+                                        <TableColumn fx:id="col_product_item_number" prefWidth="170.0" text="Item Number" />
+                                        <TableColumn fx:id="col_product_price" prefWidth="140.0" text="Price" />
+                                        <TableColumn fx:id="col_product_stock" prefWidth="100.0" text="Stock" />
                                     </columns>
                                 </TableView>
                                 <TextField fx:id="billing_table_search" layoutX="12.0" layoutY="13.0" prefHeight="36.0" prefWidth="236.0" promptText="Search" styleClass="search-billing" stylesheets="@dashboard.css" />
@@ -292,7 +306,10 @@
                                         <Font name="Dubai Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" onAction="#onInputTextChanged" prefHeight="32.0" prefWidth="180.0" promptText="Enter Quanity" styleClass="textfield" stylesheets="@dashboard.css" />
+                                <Button fx:id="btn_increase" layoutX="770.0" layoutY="388.0" text="+" onAction="#increaseQuantity"/>
+                                <Button fx:id="btn_decrease" layoutX="740.0" layoutY="388.0" text="-" onAction="#decreaseQuantity"/>
+                                <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" prefHeight="32.0" promptText="Enter Quantity" styleClass="textfield" />
+                                <!--                        <ComboBox fx:id="bill_quantity" layoutX="554.0" layoutY="388.0" onAction="#onInputTextChanged" prefHeight="32.0" prefWidth="180.0" promptText="Enter Quanity" styleClass="textfield" stylesheets="@dashboard.css" />-->
                                 <Button fx:id="bill_update" alignment="CENTER" layoutX="682.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#updateSelectedBillingData" prefHeight="38.0" prefWidth="50.0" styleClass="add" stylesheets="@dashboard.css">
                                     <graphic>
                                         <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="24.0" />
