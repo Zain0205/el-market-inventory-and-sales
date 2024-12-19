@@ -654,27 +654,26 @@ public class DashboardUserController implements Initializable {
         }
         return productsList;
     }
-
-    public void setInvoiceNum(){
-        connection=Database.getInstance().connectDB();
-        String sql="SELECT MAX(inv_num) AS inv_num FROM sales";
+    
+    public void setInvoiceNum() {
+        connection = Database.getInstance().connectDB();
+        String sql = "SELECT MAX(CAST(SUBSTRING(inv_num, 5) AS UNSIGNED)) AS inv_num FROM sales"; // Perbaikan di sini
 
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            while(resultSet.next()) {
-                String result=resultSet.getString("inv_num");
+            if (resultSet.next()) {
+                String result = resultSet.getString("inv_num");
                 if (result == null) {
                     Invoice.billingInvoiceNumber = "INV-1";
-                    inv_num.setText(Invoice.billingInvoiceNumber);
                 } else {
-                    int invId = Integer.parseInt(result.substring(4));
+                    int invId = Integer.parseInt(result);
                     invId++;
                     Invoice.billingInvoiceNumber = "INV-" + invId;
-                    inv_num.setText(Invoice.billingInvoiceNumber);
                 }
+                inv_num.setText(Invoice.billingInvoiceNumber); // Update UI
             }
-        }catch (Exception err){
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
