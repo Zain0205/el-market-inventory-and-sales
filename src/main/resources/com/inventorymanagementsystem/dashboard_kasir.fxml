@@ -53,14 +53,6 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="CLIPBOARD" size="1.2em" text="" />
                             </graphic>
                         </Button>
-                        <Button fx:id="purchase_btn" layoutX="39.0" layoutY="440.0" mnemonicParsing="false" onAction="#activateDashboard" onMouseClicked="#activateAnchorPane" prefWidth="200.0" styleClass="navbutton" stylesheets="@dashboard.css" text="PURCHASE" textFill="WHITE">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                            <graphic>
-                                <FontAwesomeIconView fill="WHITE" glyphName="SHOPPING_BAG" size="1.2em" />
-                            </graphic>
-                        </Button>
                         <Button fx:id="customer_btn" layoutX="39.0" layoutY="353.0" mnemonicParsing="false" onAction="#activateDashboard" onMouseClicked="#activateAnchorPane" prefWidth="200.0" styleClass="navbutton" stylesheets="@dashboard.css" text="CUSTOMER" textFill="WHITE">
                             <font>
                                 <Font size="16.0" />
@@ -69,7 +61,7 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="USER" size="1.2em" />
                             </graphic>
                         </Button>
-                        <Button fx:id="inventory_btn" layoutX="39.0" layoutY="484.0" mnemonicParsing="false" onAction="#activateAnchorPane" prefWidth="200.0" styleClass="navbutton" text="INVENTORY" textFill="WHITE">
+                        <Button fx:id="inventory_btn" layoutX="39.0" layoutY="440.0" mnemonicParsing="false" onAction="#activateAnchorPane" prefWidth="200.0" styleClass="navbutton" text="INVENTORY" textFill="WHITE">
                             <font>
                                 <Font size="16.0" />
                             </font>
